@@ -1,17 +1,46 @@
-<?php
-/**
- * Front to the WordPress application. This file doesn't do anything, but loads
- * wp-blog-header.php which does and tells WordPress to load the theme.
- *
- * @package WordPress
- */
 
-/**
- * Tells WordPress to load the WordPress theme and output it.
- *
- * @var bool
- */
-define( 'WP_USE_THEMES', true );
+<?php get_header();
 
-/** Loads the WordPress Environment and Template */
-require __DIR__ . '/wp-blog-header.php';
+
+/* *
+archive templete for displaying blog posts  */
+
+?>
+
+<div class="blog">
+
+<div class="blog-head">
+	  <h1><?php wp_title()?></h1>
+	  </div>
+
+<article class="blog-posts" >
+	<?php
+
+	if ( have_posts()) {
+
+		while ( have_posts() ) {
+
+			the_post();
+
+            get_template_part( "template-parts/content/content", "archive" );
+
+			
+		} 
+	}
+
+	
+	
+    ?>
+</article>
+
+   <?php the_posts_pagination() ?>
+
+
+</div>
+  </div>
+
+
+  
+<?php get_footer();
+?>
+
